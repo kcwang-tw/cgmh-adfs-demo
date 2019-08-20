@@ -23,18 +23,17 @@ namespace PrimaryApi.DataAccess.FromTestApi.Applications
 
             if (response.IsSuccessStatusCode)
             {
-                var apiResponse = await response.Content.ReadAsStringAsync();
-                var userRank = JsonConvert.DeserializeObject<REDUDEMORNK>(apiResponse);
+                var readItem = await response.Content.ReadAsAsync<REDUDEMORNK>();
 
-                if (string.IsNullOrWhiteSpace(userRank.IDNO))
+                if (string.IsNullOrWhiteSpace(readItem.IDNO))
                 {
                     return null;
                 }
 
                 return new UserRank
                 {
-                    UserId = userRank.IDNO,
-                    Rank = userRank.RNK
+                    UserId = readItem.IDNO,
+                    Rank = readItem.RNK
                 };
             }
 
