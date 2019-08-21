@@ -8,7 +8,7 @@ using TestApi.WebApi.Models;
 
 namespace TestApi.WebApi.Repositories
 {
-    public class SeatingPlanRepository : RepositoryBase
+    public class SeatsRepository : RepositoryBase
     {
         public async Task<IEnumerable<REDUDEMOSEAT>> GetSeatingPlanAsync()
         {

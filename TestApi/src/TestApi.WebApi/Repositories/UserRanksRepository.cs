@@ -8,7 +8,7 @@ using TestApi.WebApi.Models;
 
 namespace TestApi.WebApi.Repositories
 {
-    public class UserRankRepository : RepositoryBase
+    public class UserRanksRepository : RepositoryBase
     {
         public async Task<REDUDEMORNK> GetRankByUserIdAsync(string userId)
         {

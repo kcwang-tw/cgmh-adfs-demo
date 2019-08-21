@@ -11,14 +11,14 @@ using PrimaryApi.WebApi.Resources;
 
 namespace PrimaryApi.WebApi.Controllers
 {
-    [Route("api/v1/user-rank")]
+    [Route("api/v1/ranks")]
     [ApiController]
-    public class UserRankController : ControllerBase
+    public class RanksController : ControllerBase
     {
-        private readonly IUserRankQuery _query;
+        private readonly IRanksQuery _query;
         private readonly IMapper _mapper;
 
-        public UserRankController(IUserRankQuery query, IMapper mapper)
+        public RanksController(IRanksQuery query, IMapper mapper)
         {
             _query = query;
             _mapper = mapper;

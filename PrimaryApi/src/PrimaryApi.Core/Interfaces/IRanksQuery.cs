@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PrimaryApi.Core.Interfaces
 {
-    public interface ISeatingPlanQuery
+    public interface IRanksQuery
     {
-        Task<IEnumerable<SeatingPlan>> GetAllSeatsAsync();
+        Task<UserRank> GetUserRankAsync(string userId);
     }
 }

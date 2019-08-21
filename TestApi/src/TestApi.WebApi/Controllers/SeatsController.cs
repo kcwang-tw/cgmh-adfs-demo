@@ -10,13 +10,13 @@ using TestApi.WebApi.Repositories;
 namespace TestApi.WebApi.Controllers
 {
     [RoutePrefix("api/seats")]
-    public class SeatingPlanController : ApiController
+    public class SeatsController : ApiController
     {
-        private readonly SeatingPlanRepository _repo;
+        private readonly SeatsRepository _repo;
 
-        public SeatingPlanController()
+        public SeatsController()
         {
-            _repo = new SeatingPlanRepository();
+            _repo = new SeatsRepository();
         }
 
         [HttpGet]

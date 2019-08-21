@@ -9,14 +9,14 @@ using TestApi.WebApi.Repositories;
 
 namespace TestApi.WebApi.Controllers
 {
-    [RoutePrefix("api/rank")]
-    public class UserRankController : ApiController
+    [RoutePrefix("api/ranks")]
+    public class UserRanksController : ApiController
     {
-        private readonly UserRankRepository _repo;
+        private readonly UserRanksRepository _repo;
 
-        public UserRankController()
+        public UserRanksController()
         {
-            _repo = new UserRankRepository();
+            _repo = new UserRanksRepository();
         }
 
         [HttpGet]

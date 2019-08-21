@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace PrimaryApi.DataAccess.FromTestApi.Applications
 {
-    public class SeatingPlanTestApi : TestApiBase, ISeatingPlanQuery
+    public class SeatsTestApi : TestApiBase, ISeatsQuery
     {
-        public SeatingPlanTestApi(IHttpClientFactory clientFactory) 
+        public SeatsTestApi(IHttpClientFactory clientFactory) 
             : base(clientFactory)
         {
         }
 
-        public async Task<IEnumerable<SeatingPlan>> GetAllSeatsAsync()
+        public async Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync()
         {
-            var response = await Client.GetAsync("seating-plan");
-            var result = new List<SeatingPlan>();
+            var response = await Client.GetAsync("seats");
+            var result = new List<DepartmentSeat>();
 
             if (response.IsSuccessStatusCode)
             {
@@ -28,7 +28,7 @@ namespace PrimaryApi.DataAccess.FromTestApi.Applications
 
                 foreach (var item in readItems)
                 {
-                    result.Add(new SeatingPlan
+                    result.Add(new DepartmentSeat
                     {
                         UserId = item.IDNO,
                         UserName = item.CNM,

@@ -13,7 +13,7 @@ namespace PrimaryApi.WebApi.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<UserRank, UserRankResource>();
-            CreateMap<SeatingPlan, SeatingPlanResource>();
+            CreateMap<DepartmentSeat, SeatResource>();
         }
     }
 }

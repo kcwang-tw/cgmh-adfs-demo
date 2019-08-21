@@ -92,15 +92,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\SeatingPlanController.cs" />
-    <Compile Include="Controllers\UserRankController.cs" />
+    <Compile Include="Controllers\SeatsController.cs" />
+    <Compile Include="Controllers\UserRanksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\REDUDEMORNK.cs" />
     <Compile Include="Models\REDUDEMOSEAT.cs" />
-    <Compile Include="Repositories\SeatingPlanRepository.cs" />
-    <Compile Include="Repositories\UserRankRepository.cs" />
+    <Compile Include="Repositories\SeatsRepository.cs" />
+    <Compile Include="Repositories\UserRanksRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
   </ItemGroup>

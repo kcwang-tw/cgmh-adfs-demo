@@ -11,14 +11,14 @@ using PrimaryApi.WebApi.Resources;
 
 namespace PrimaryApi.WebApi.Controllers
 {
-    [Route("api/v1/seating-plan")]
+    [Route("api/v1/seats")]
     [ApiController]
-    public class SeatingPlanController : ControllerBase
+    public class SeatsController : ControllerBase
     {
-        private readonly ISeatingPlanQuery _query;
+        private readonly ISeatsQuery _query;
         private readonly IMapper _mapper;
 
-        public SeatingPlanController(ISeatingPlanQuery query, IMapper mapper)
+        public SeatsController(ISeatsQuery query, IMapper mapper)
         {
             _query = query;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace PrimaryApi.WebApi.Controllers
 
             if (seatingPlan.Count() >= 1)
             {
-                var resource = _mapper.Map<IEnumerable<SeatingPlanResource>>(seatingPlan);
+                var resource = _mapper.Map<IEnumerable<SeatResource>>(seatingPlan);
                 return Ok(new ApiResponse(InnerStatusCodes.GetSuccess2001)
                 {
                     data = resource

@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace PrimaryApi.DataAccess.FromTestApi.Applications
 {
-    public class UserRankTestApi : TestApiBase, IUserRankQuery
+    public class RanksTestApi : TestApiBase, IRanksQuery
     {
-        public UserRankTestApi(IHttpClientFactory clientFactory) 
+        public RanksTestApi(IHttpClientFactory clientFactory) 
             : base(clientFactory)
         {
         }
 
         public async Task<UserRank> GetUserRankAsync(string userId)
         {
-            var response = await Client.GetAsync($"user-rank/{userId}");
+            var response = await Client.GetAsync($"ranks/{userId}");
 
             if (response.IsSuccessStatusCode)
             {

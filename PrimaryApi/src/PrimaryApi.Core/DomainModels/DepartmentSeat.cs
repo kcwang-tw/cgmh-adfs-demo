@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace PrimaryApi.WebApi.Resources
+namespace PrimaryApi.Core.DomainModels
 {
-    public class SeatingPlanResource
+    public class DepartmentSeat
     {
         public string UserId { get; set; }
         public string UserName { get; set; }

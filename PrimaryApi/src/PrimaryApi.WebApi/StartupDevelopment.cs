@@ -38,8 +38,8 @@ namespace PrimaryApi.WebApi
             services.AddSingleton(mapper);
 
             // Injection
-            services.AddScoped<IUserRankQuery, UserRankTestApi>();
-            services.AddScoped<ISeatingPlanQuery, SeatingPlanTestApi>();
+            services.AddScoped<IRanksQuery, RanksTestApi>();
+            services.AddScoped<ISeatsQuery, SeatsTestApi>();
         }
 
         public void Configure(IApplicationBuilder app)
