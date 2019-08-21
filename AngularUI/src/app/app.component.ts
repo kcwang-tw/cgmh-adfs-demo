@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SeatingPlan } from './_models/seating-plan.model';
-import { SeatingPlanService } from './_services/seating-plan.service';
+import { DepartmentSeat } from './_models/department-seat.model';
+import { SeatsService } from './_services/seats.service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,16 @@ import { SeatingPlanService } from './_services/seating-plan.service';
 export class AppComponent implements OnInit {
 
   title = '座位表';
-  seats: SeatingPlan[];
+  seats: DepartmentSeat[];
 
-  constructor(private seatingPlanService: SeatingPlanService) { }
+  constructor(private seatsService: SeatsService) { }
 
   ngOnInit() {
     this.getAllSeats();
   }
 
   getAllSeats() {
-    this.seatingPlanService.getAllSeats().subscribe(
+    this.seatsService.getAllSeats().subscribe(
       response => {
         this.seats = response;
       }, error => {

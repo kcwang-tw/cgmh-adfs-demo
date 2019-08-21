@@ -1,4 +1,4 @@
-export interface SeatingPlan {
+export interface DepartmentSeat {
   userId: string;
   userName: string;
   extension: string;

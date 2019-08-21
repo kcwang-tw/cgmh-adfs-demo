@@ -4,19 +4,19 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { SeatingPlan } from '../_models/seating-plan.model';
+import { DepartmentSeat } from '../_models/department-seat.model';
 import { ApiResponse } from '../_models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SeatingPlanService {
+export class SeatsService {
 
-  private baseUrl = environment.apiUrl + 'seating-plan';
+  private baseUrl = environment.apiUrl + 'seats';
 
   constructor(private http: HttpClient) { }
 
-  getAllSeats(): Observable<SeatingPlan[]> {
+  getAllSeats(): Observable<DepartmentSeat[]> {
     return this.http.get(this.baseUrl)
       .pipe(
         map((response: ApiResponse) => {
