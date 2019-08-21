@@ -9,7 +9,7 @@ using TestApi.WebApi.Repositories;
 
 namespace TestApi.WebApi.Controllers
 {
-    [RoutePrefix("api/seating-plan")]
+    [RoutePrefix("api/seats")]
     public class SeatingPlanController : ApiController
     {
         private readonly SeatingPlanRepository _repo;

@@ -9,7 +9,7 @@ using TestApi.WebApi.Repositories;
 
 namespace TestApi.WebApi.Controllers
 {
-    [RoutePrefix("api/user-rank")]
+    [RoutePrefix("api/rank")]
     public class UserRankController : ApiController
     {
         private readonly UserRankRepository _repo;

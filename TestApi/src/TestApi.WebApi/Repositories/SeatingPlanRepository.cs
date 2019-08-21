@@ -10,14 +10,14 @@ namespace TestApi.WebApi.Repositories
 {
     public class SeatingPlanRepository : RepositoryBase
     {
-        public async Task<IEnumerable<REDUDEMOSEATING>> GetSeatingPlanAsync()
+        public async Task<IEnumerable<REDUDEMOSEAT>> GetSeatingPlanAsync()
         {
             using (var conn = OracleConnection)
             {
-                var sql = "SELECT * FROM REDUDEMOSEATING";
+                var sql = "SELECT * FROM REDUDEMOSEAT";
 
                 conn.Open();
-                var seatingPlan = await conn.QueryAsync<REDUDEMOSEATING>(sql);
+                var seatingPlan = await conn.QueryAsync<REDUDEMOSEAT>(sql);
 
                 return seatingPlan;
             }

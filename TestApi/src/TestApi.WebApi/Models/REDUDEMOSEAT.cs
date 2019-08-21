@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TestApi.WebApi.Models
 {
-    public class REDUDEMOSEATING
+    public class REDUDEMOSEAT
     {
         public string IDNO { get; set; }
         public string CNM { get; set; }

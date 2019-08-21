@@ -98,7 +98,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\REDUDEMORNK.cs" />
-    <Compile Include="Models\REDUDEMOSEATING.cs" />
+    <Compile Include="Models\REDUDEMOSEAT.cs" />
     <Compile Include="Repositories\SeatingPlanRepository.cs" />
     <Compile Include="Repositories\UserRankRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
