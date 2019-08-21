@@ -34,7 +34,7 @@
         <p>Phone: {{ seat.phone }}</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="warn">刪除</button>
+        <button mat-raised-button color="warn" (click)="removeSeat(seat.userId)">刪除</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>

@@ -24,4 +24,22 @@ export class SeatsService {
         })
       );
   }
+
+  addNewSeat(newSeat: DepartmentSeat): Observable<any> {
+    return this.http.post(this.baseUrl, newSeat)
+      .pipe(
+        map((response: ApiResponse) => {
+          return response.data;
+        })
+      );
+  }
+
+  removeSeat(userId: string): Observable<any> {
+    return this.http.delete(this.baseUrl + `/${userId}`)
+      .pipe(
+        map((response: ApiResponse) => {
+          return response.data;
+        })
+      );
+  }
 }
