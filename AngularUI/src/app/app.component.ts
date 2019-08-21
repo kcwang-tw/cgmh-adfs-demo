@@ -13,7 +13,7 @@ import { SeatsService } from './_services/seats.service';
 export class AppComponent implements OnInit {
 
   title = '座位表';
-  userRank: string;
+  userRank = '9';
   seats: DepartmentSeat[];
   newSeatForm: FormGroup;
 
@@ -29,6 +29,14 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getAllSeats();
+  }
+
+  getRank(userId: string) {
+    this.rankService.getUserRank(userId).subscribe(
+      response => {
+        this.userRank = response.rank;
+      }
+    );
   }
 
   getAllSeats() {

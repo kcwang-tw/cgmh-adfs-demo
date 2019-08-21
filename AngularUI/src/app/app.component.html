@@ -4,7 +4,7 @@
   </h1>
 </div>
 
-<form class="input-form" [formGroup]="newSeatForm">
+<form class="input-form" [formGroup]="newSeatForm" *ngIf="userRank === '1'">
   <mat-form-field class="input">
     <input name="userId" matInput formControlName="userId" placeholder="ID" required>
   </mat-form-field>
@@ -33,7 +33,7 @@
         <p>Ext: {{ seat.extension }}</p>
         <p>Phone: {{ seat.phone }}</p>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions *ngIf="userRank === '1'">
         <button mat-raised-button color="warn" (click)="removeSeat(seat.userId)">刪除</button>
       </mat-card-actions>
     </mat-card>
