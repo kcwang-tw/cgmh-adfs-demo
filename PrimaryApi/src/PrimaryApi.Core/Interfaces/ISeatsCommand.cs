@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PrimaryApi.Core.Interfaces
 {
-    public interface ISeatsQuery
+    public interface ISeatsCommand
     {
-        Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync();
+        Task<int> AddSeatAsync(DepartmentSeat seat);
 
-        Task<DepartmentSeat> GetSeatByUserIdAsync(string userId);
+        Task<int> RemoveSeatAsync(string userId);
     }
 }

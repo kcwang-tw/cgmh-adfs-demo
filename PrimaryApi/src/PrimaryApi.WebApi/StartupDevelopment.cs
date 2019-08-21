@@ -40,6 +40,7 @@ namespace PrimaryApi.WebApi
             // Injection
             services.AddScoped<IRanksQuery, RanksTestApi>();
             services.AddScoped<ISeatsQuery, SeatsTestApi>();
+            services.AddScoped<ISeatsCommand, SeatsTestApi>();
         }
 
         public void Configure(IApplicationBuilder app)

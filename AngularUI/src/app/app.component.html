@@ -4,23 +4,23 @@
   </h1>
 </div>
 
-<form class="input-form">
+<form class="input-form" [formGroup]="newSeatForm">
   <mat-form-field class="input">
-    <input matInput placeholder="ID">
+    <input name="userId" matInput formControlName="userId" placeholder="ID" required>
   </mat-form-field>
   <mat-form-field class="input">
-    <input matInput placeholder="姓名">
+    <input name="userName" matInput formControlName="userName" placeholder="姓名" required>
   </mat-form-field>
   <mat-form-field class="input">
-    <input matInput placeholder="分機">
+    <input name="extension" matInput formControlName="extension" placeholder="分機" required>
   </mat-form-field>
   <mat-form-field class="input">
-    <input matInput placeholder="公務機簡碼">
+    <input name="phone" matInput formControlName="phone" placeholder="公務機簡碼" required>
   </mat-form-field>
   <mat-form-field class="input">
-    <input matInput placeholder="座位">
+    <input name="seat" matInput formControlName="seat" placeholder="座位" required>
   </mat-form-field>
-  <button mat-raised-button>新增</button>
+  <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!newSeatForm.valid">新增</button>
 </form>
 
 <mat-grid-list cols="4" rowHeight="200px">

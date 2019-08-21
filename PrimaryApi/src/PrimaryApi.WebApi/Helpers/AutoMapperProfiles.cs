@@ -14,6 +14,8 @@ namespace PrimaryApi.WebApi.Helpers
         {
             CreateMap<UserRank, UserRankResource>();
             CreateMap<DepartmentSeat, SeatResource>();
+
+            CreateMap<SeatAddResource, DepartmentSeat>();
         }
     }
 }

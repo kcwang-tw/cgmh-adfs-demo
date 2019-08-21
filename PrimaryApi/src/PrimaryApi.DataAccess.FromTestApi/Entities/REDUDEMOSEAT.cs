@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PrimaryApi.DataAccess.FromTestApi.Entities
 {
-    class REDUDEMOSEATING
+    class REDUDEMOSEAT
     {
         public string IDNO { get; set; }
         public string CNM { get; set; }
