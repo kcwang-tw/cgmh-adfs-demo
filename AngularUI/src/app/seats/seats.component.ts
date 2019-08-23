@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { OAuthService } from 'angular-oauth2-oidc';
+
 import { DepartmentSeat } from '../_models/department-seat.model';
 import { RanksService } from '../_services/ranks.service';
 import { SeatsService } from '../_services/seats.service';
@@ -15,8 +17,11 @@ export class SeatsComponent implements OnInit {
   userRank = '9';
   seats: DepartmentSeat[];
   newSeatForm: FormGroup;
+  name: string;
 
-  constructor(private rankService: RanksService, private seatsService: SeatsService) {
+  constructor(private rankService: RanksService,
+              private seatsService: SeatsService,
+              private oauthService: OAuthService) {
     this.newSeatForm = new FormGroup({
       userId: new FormControl('', Validators.required),
       userName: new FormControl('', Validators.required),
@@ -28,6 +33,7 @@ export class SeatsComponent implements OnInit {
 
   ngOnInit() {
     this.getAllSeats();
+    this.getName();
   }
 
   getRank(userId: string) {
@@ -67,5 +73,14 @@ export class SeatsComponent implements OnInit {
       }
     );
 
+  }
+
+  getName() {
+    const claims = this.oauthService.getIdentityClaims();
+    console.log(claims);
+  }
+
+  logout() {
+    this.oauthService.logOut();
   }
 }
