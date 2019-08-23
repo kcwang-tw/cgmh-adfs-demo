@@ -1,0 +1,35 @@
+<form class="input-form" [formGroup]="newSeatForm" *ngIf="userRank === '1'">
+  <mat-form-field class="input">
+    <input name="userId" matInput formControlName="userId" placeholder="ID" required>
+  </mat-form-field>
+  <mat-form-field class="input">
+    <input name="userName" matInput formControlName="userName" placeholder="姓名" required>
+  </mat-form-field>
+  <mat-form-field class="input">
+    <input name="extension" matInput formControlName="extension" placeholder="分機" required>
+  </mat-form-field>
+  <mat-form-field class="input">
+    <input name="phone" matInput formControlName="phone" placeholder="公務機簡碼" required>
+  </mat-form-field>
+  <mat-form-field class="input">
+    <input name="seat" matInput formControlName="seat" placeholder="座位" required>
+  </mat-form-field>
+  <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!newSeatForm.valid">新增</button>
+</form>
+
+<mat-grid-list cols="4" rowHeight="200px">
+  <mat-grid-tile *ngFor="let seat of seats">
+    <mat-card class="seat-tile">
+      <mat-card-title>
+        {{seat.userName}}
+      </mat-card-title>
+      <mat-card-content>
+        <p>Ext: {{ seat.extension }}</p>
+        <p>Phone: {{ seat.phone }}</p>
+      </mat-card-content>
+      <mat-card-actions *ngIf="userRank === '1'">
+        <button mat-raised-button color="warn" (click)="removeSeat(seat.userId)">刪除</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

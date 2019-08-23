@@ -13,60 +13,8 @@ import { SeatsService } from './_services/seats.service';
 export class AppComponent implements OnInit {
 
   title = '座位表';
-  userRank = '9';
-  seats: DepartmentSeat[];
-  newSeatForm: FormGroup;
 
-  constructor(private rankService: RanksService, private seatsService: SeatsService) {
-    this.newSeatForm = new FormGroup({
-      userId: new FormControl('', Validators.required),
-      userName: new FormControl('', Validators.required),
-      extension: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      seat: new FormControl('', Validators.required)
-    });
-  }
+  constructor() { }
 
-  ngOnInit() {
-    this.getAllSeats();
-  }
-
-  getRank(userId: string) {
-    this.rankService.getUserRank(userId).subscribe(
-      response => {
-        this.userRank = response.rank;
-      }
-    );
-  }
-
-  getAllSeats() {
-    this.seatsService.getAllSeats().subscribe(
-      response => {
-        this.seats = response;
-      }, error => {
-        console.log(error);
-      }
-    );
-  }
-
-  onSubmit() {
-    this.seatsService.addNewSeat(this.newSeatForm.value).subscribe(
-      response => {
-        console.log(response);
-        this.newSeatForm.reset();
-        this.getAllSeats();
-      }
-    );
-
-  }
-
-  removeSeat(userId: string) {
-    this.seatsService.removeSeat(userId).subscribe(
-      response => {
-        console.log(response);
-        this.getAllSeats();
-      }
-    );
-
-  }
+  ngOnInit() { }
 }
