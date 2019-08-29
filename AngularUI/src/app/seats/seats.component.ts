@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DepartmentSeat } from '../_models/department-seat.model';
 import { RanksService } from '../_services/ranks.service';
 import { SeatsService } from '../_services/seats.service';
+import { AdalService } from '../adal/adal.service';
 
 @Component({
   selector: 'app-seats',
@@ -13,10 +14,14 @@ import { SeatsService } from '../_services/seats.service';
 export class SeatsComponent implements OnInit {
 
   userRank = '9';
+  userInfo: any;
+
   seats: DepartmentSeat[];
   newSeatForm: FormGroup;
 
-  constructor(private rankService: RanksService, private seatsService: SeatsService) {
+  constructor(private rankService: RanksService,
+              private seatsService: SeatsService,
+              private adalService: AdalService) {
     this.newSeatForm = new FormGroup({
       userId: new FormControl('', Validators.required),
       userName: new FormControl('', Validators.required),
@@ -27,6 +32,7 @@ export class SeatsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserInfo();
     this.getAllSeats();
   }
 
@@ -56,7 +62,6 @@ export class SeatsComponent implements OnInit {
         this.getAllSeats();
       }
     );
-
   }
 
   removeSeat(userId: string) {
@@ -66,6 +71,14 @@ export class SeatsComponent implements OnInit {
         this.getAllSeats();
       }
     );
+  }
 
+  getUserInfo() {
+    console.log(this.adalService.userInfo.profile);
+    this.userInfo = this.adalService.userInfo.profile;
+  }
+
+  logOut() {
+    this.adalService.logOut();
   }
 }

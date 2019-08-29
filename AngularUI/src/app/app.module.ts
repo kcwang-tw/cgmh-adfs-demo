@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { SharedMaterialModule } from './_shared/modules/shared-material/shared-material.module';
 import { SeatsComponent } from './seats/seats.component';
 import { LoginComponent } from './login/login.component';
+import { AdalModule } from './adal/adal.module';
 
 
 @NgModule({
@@ -27,8 +28,19 @@ import { LoginComponent } from './login/login.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'seats', component: SeatsComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'login' }
-    ])
+    ]),
+    AdalModule.forRoot({
+      instance: 'https://cghadfs.cgmh.org.tw/',
+      tenant: 'adfs',
+      redirectUri: window.location.origin + '/seats',
+      navigateToLoginRequestUrl: false,
+      cacheLocation: 'localStorage',
+      clientId: '4200',
+      postLogoutRedirectUri: window.location.origin + '/',
+      endpoints: {
+        'http://10.31.155.41/demo-primary': 'http://10.31.155.41/demo-primary'
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
