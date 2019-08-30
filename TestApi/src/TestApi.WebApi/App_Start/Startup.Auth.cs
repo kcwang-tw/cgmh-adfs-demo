@@ -11,20 +11,20 @@ namespace TestApi.WebApi
 {
     public partial class Startup
     {
+        // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.UseActiveDirectoryFederationServicesBearerAuthentication(
-            new ActiveDirectoryFederationServicesBearerAuthenticationOptions
-            {
-                MetadataEndpoint = "https://adfs2016.southeastasia.cloudapp.azure.com/federationmetadata/2007-06/federationmetadata.xml",
-                //ConfigurationManager.AppSettings["ida:AdfsMetadataEndpoint"],
-                TokenValidationParameters = new TokenValidationParameters()
-                {
-                    SaveSigninToken = true,
-                    ValidAudience = @"https://localhost:44382"//ConfigurationManager.AppSettings["ida:Audience"]
-                }
+            // Note : Need install Microsoft.Owin.Host.SystemWeb
 
-            });
+            app.UseActiveDirectoryFederationServicesBearerAuthentication(
+                new ActiveDirectoryFederationServicesBearerAuthenticationOptions
+                {
+                    MetadataEndpoint = ConfigurationManager.AppSettings["ida:AdfsMetadataEndpoint"],
+                    TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidAudience = ConfigurationManager.AppSettings["ida:Audience"]
+                    }
+                });
         }
     }
 }

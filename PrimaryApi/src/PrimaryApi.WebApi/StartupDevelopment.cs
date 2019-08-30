@@ -50,15 +50,6 @@ namespace PrimaryApi.WebApi
                 };
             });
 
-            //services
-            //    .AddAuthorization(options =>
-            //    {
-            //        options.DefaultPolicy = new AuthorizationPolicyBuilder()
-            //            .RequireAuthenticatedUser()
-            //            .AddAuthenticationSchemes("ADFS")
-            //            .Build();
-            //    });
-
             // AutoMapper
             var mappingConfig = new MapperConfiguration(c =>
             {
