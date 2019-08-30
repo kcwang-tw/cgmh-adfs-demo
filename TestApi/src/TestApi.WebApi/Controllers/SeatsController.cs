@@ -10,6 +10,7 @@ using TestApi.WebApi.Repositories;
 
 namespace TestApi.WebApi.Controllers
 {
+    //[Authorize]
     [RoutePrefix("api/seats")]
     public class SeatsController : ApiController
     {

@@ -12,15 +12,26 @@ namespace TestApi.WebApi.Repositories
     {
         public async Task<IEnumerable<REDUDEMOSEAT>> GetAllSeatsAsync()
         {
-            using (var conn = OracleConnection)
+            //using (var conn = OracleConnection)
+            //{
+            //    var sql = "SELECT * FROM REDUDEMOSEAT";
+
+            //    conn.Open();
+            //    var seatingPlan = await conn.QueryAsync<REDUDEMOSEAT>(sql);
+
+            //    return seatingPlan;
+            //}
+
+            return new List<REDUDEMOSEAT>()
             {
-                var sql = "SELECT * FROM REDUDEMOSEAT";
-
-                conn.Open();
-                var seatingPlan = await conn.QueryAsync<REDUDEMOSEAT>(sql);
-
-                return seatingPlan;
-            }
+                new REDUDEMOSEAT
+                {
+                    CNM = "Sky Chang",
+                    EXT = "EXT",
+                    PHONE = "0925252525",
+                    IDNO = "A123456789",
+                    SEAT = "123" }
+            };
         }
 
         public async Task<int> CreateSeatAsync(REDUDEMOSEAT seat)
