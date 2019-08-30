@@ -15,7 +15,7 @@ namespace TestApi.WebApi.Repositories
         {
             // 建立資料庫連線
             var connString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["JIATEST4"].ConnectionString;
-            OracleConnection = new Oracle.DataAccess.Client.OracleConnection(connString);
+            //OracleConnection = new Oracle.DataAccess.Client.OracleConnection(connString);
         }
     }
 }

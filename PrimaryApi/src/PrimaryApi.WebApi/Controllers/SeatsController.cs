@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimaryApi.Core.DomainModels;
@@ -12,6 +14,7 @@ using PrimaryApi.WebApi.Resources;
 
 namespace PrimaryApi.WebApi.Controllers
 {
+    [Authorize]
     [Route("api/v1/seats")]
     [ApiController]
     public class SeatsController : ControllerBase
@@ -30,6 +33,8 @@ namespace PrimaryApi.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSeats()
         {
+
+            
             var seats = await _query.GetAllSeatsAsync();
 
             if (seats.Count() >= 1)
