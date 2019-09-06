@@ -46,18 +46,10 @@ namespace PrimaryApi.WebApi
 
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
+                    SaveSigninToken = true,
                     ValidIssuer = "http://adfs2016.southeastasia.cloudapp.azure.com/adfs/services/trust"
                 };
             });
-
-            //services
-            //    .AddAuthorization(options =>
-            //    {
-            //        options.DefaultPolicy = new AuthorizationPolicyBuilder()
-            //            .RequireAuthenticatedUser()
-            //            .AddAuthenticationSchemes("ADFS")
-            //            .Build();
-            //    });
 
             // AutoMapper
             var mappingConfig = new MapperConfiguration(c =>
