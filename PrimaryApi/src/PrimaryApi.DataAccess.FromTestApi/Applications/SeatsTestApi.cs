@@ -37,18 +37,14 @@ namespace PrimaryApi.DataAccess.FromTestApi.Applications
 
             authContext.TokenCache.Clear();
 
-            //var authResult = await authContext.AcquireTokenSilentAsync(
-            //    "https://localhost:44382", credential, UserIdentifier.AnyUser);
-
-
-            //var authResult = await authContext.AcquireTokenAsync("https://localhost:44391", credential);
-            var authResult = await authContext.AcquireTokenAsync("https://localhost:44382", credential);
+            var authResult = await authContext.AcquireTokenAsync(
+                "https://localhost:44382", 
+                credential);
 
             Client.DefaultRequestHeaders.Authorization =
                    new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
 
             var response = await Client.GetAsync("seats/");
-            //var response = await Client.GetAsync("values/");
 
             var result = new List<DepartmentSeat>();
 

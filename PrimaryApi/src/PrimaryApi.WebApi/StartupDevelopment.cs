@@ -46,6 +46,7 @@ namespace PrimaryApi.WebApi
 
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
+                    SaveSigninToken = true,
                     ValidIssuer = "http://adfs2016.southeastasia.cloudapp.azure.com/adfs/services/trust"
                 };
             });

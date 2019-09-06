@@ -40,6 +40,7 @@ namespace PrimaryApi.WinForm
             {
                 result = await _authContext.AcquireTokenAsync(
                     _resourceId,
+                    //"https://localhost:44382/s2",
                     _clientId,
                     _redirectUri, new PlatformParameters(PromptBehavior.Always));
                 MessageBox.Show("Token:" + result.AccessToken);
@@ -52,6 +53,8 @@ namespace PrimaryApi.WinForm
                 //https://localhost:44326/api/v1/seats
 
                 var response = await httpClient.GetAsync(_resourceBaseAddress + "/api/v1/seats");
+                //var response = await httpClient.GetAsync("https://localhost:44382/api/test");
+
 
                 if (!response.IsSuccessStatusCode)
                 {

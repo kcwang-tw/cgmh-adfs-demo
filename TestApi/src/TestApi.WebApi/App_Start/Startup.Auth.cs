@@ -22,6 +22,7 @@ namespace TestApi.WebApi
                     MetadataEndpoint = ConfigurationManager.AppSettings["ida:AdfsMetadataEndpoint"],
                     TokenValidationParameters = new TokenValidationParameters()
                     {
+                        SaveSigninToken = true,
                         ValidAudience = ConfigurationManager.AppSettings["ida:Audience"]
                     }
                 });

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimaryApi.Wpf", "PrimaryAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimaryApi.WinForm", "PrimaryApi.WinForm\PrimaryApi.WinForm.csproj", "{EFC49298-9085-4922-83BD-2D900C8115C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimaryApi.WebForm", "PrimaryApi.WebForm\PrimaryApi.WebForm.csproj", "{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{EFC49298-9085-4922-83BD-2D900C8115C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFC49298-9085-4922-83BD-2D900C8115C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFC49298-9085-4922-83BD-2D900C8115C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{68DA3B6A-DA9B-46FB-923A-C80272494922} = {9DF9F487-12CC-4D3B-802F-69BA277BEC0F}
 		{42E3FF0C-4550-486B-B7F5-26BB2565B376} = {68DA3B6A-DA9B-46FB-923A-C80272494922}
 		{EFC49298-9085-4922-83BD-2D900C8115C1} = {68DA3B6A-DA9B-46FB-923A-C80272494922}
+		{D3A27FDE-9C6B-4AF1-BC98-B8288C8D0557} = {5F6D0C38-B193-4A1A-B1E8-EB34EC03D7BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {95D714DD-5A38-4D46-B9F9-915BD07FEAE8}
