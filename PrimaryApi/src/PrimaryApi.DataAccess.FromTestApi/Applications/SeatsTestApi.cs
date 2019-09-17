@@ -21,25 +21,27 @@ namespace PrimaryApi.DataAccess.FromTestApi.Applications
         {
         }
 
-        public async Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync()
+        public async Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync(UserAssertion userAssertion)
         {
+            // 實際串接網址
             //resource=https%3a%2f%2flocalhost:44382
             //&client_id=0965501a-0e59-4fb4-8b37-509e50d85626
             //&client_secret=lsmZnF8GgeTd_wSiDYk2ST6ENWqq4SgJ4T3FBF-g
             //&grant_type=client_credentials
 
             var credential = new ClientCredential(
-                "0965501a-0e59-4fb4-8b37-509e50d85626",
-                "OgaagV7PkQLSrkiVtVpNP5VCoG6uK3T6r3th-xeu");
+                "https://localhost:44326", // 此 ClientID 需要和 ResourceID 同
+                "ko85rwXGAUGFFgJb_ogRWW5BRs_LWovwE2aGIYHX");
             var authContext = new AuthenticationContext(
                 "https://adfs2016.southeastasia.cloudapp.azure.com/adfs/",
                 false);
 
-            authContext.TokenCache.Clear();
+            //authContext.TokenCache.Clear();
 
             var authResult = await authContext.AcquireTokenAsync(
-                "https://localhost:44382", 
-                credential);
+                "https://localhost:44382",
+                credential,
+                userAssertion);
 
             Client.DefaultRequestHeaders.Authorization =
                    new AuthenticationHeaderValue("Bearer", authResult.AccessToken);
@@ -74,8 +76,8 @@ namespace PrimaryApi.DataAccess.FromTestApi.Applications
 
         public async Task<DepartmentSeat> GetSeatByUserIdAsync(string userId)
         {
-            var allSeats = await GetAllSeatsAsync();
-            return allSeats.FirstOrDefault(s => s.UserId == userId);
+            //var allSeats = await GetAllSeatsAsync();
+            return null; //allSeats.FirstOrDefault(s => s.UserId == userId);
         }
 
         public async Task<int> AddSeatAsync(DepartmentSeat seat)

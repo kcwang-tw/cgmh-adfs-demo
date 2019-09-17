@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using PrimaryApi.Core.DomainModels;
 using PrimaryApi.Core.Interfaces;
 using PrimaryApi.WebApi.Helpers;
@@ -35,19 +37,22 @@ namespace PrimaryApi.WebApi.Controllers
         public async Task<IActionResult> GetAllSeats()
         {
 
-            var user = HttpContext.User.Identity.Name;
-            var aa = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //var scopeClaim = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/scope");
-            //if (scopeClaim == null || (!scopeClaim.Value.Contains("user_impersonation")))
-            //{
-            //    //throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The Scope claim does not contain 'user_impersonation' or scope claim not found" });
-            //}
+            var scopeClaim = HttpContext.User.FindFirst("http://schemas.microsoft.com/identity/claims/scope");
+            if (scopeClaim == null || (!scopeClaim.Value.Contains("user_impersonation")))
+            {
+                // 錯誤處理先註解，可自行增加
+                //return Unauthorized();
+            }
 
-            //// A user's To Do list is keyed off of the NameIdentifier claim, which contains an immutable, unique identifier for the user.
-            //Claim subject = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
+            // 取得 UPN
+            Claim subject = HttpContext.User.FindFirst(ClaimTypes.Upn);
+
+            // 取得 BootstrapContext
+            string userAccessToken = (User.Identity as ClaimsIdentity).BootstrapContext as string;
+            var userAssertion = new UserAssertion(userAccessToken, "urn:ietf:params:oauth:grant-type:jwt-bearer", subject.Value);
 
 
-            var seats = await _query.GetAllSeatsAsync();
+            var seats = await _query.GetAllSeatsAsync(userAssertion);
 
             if (seats.Count() >= 1)
             {

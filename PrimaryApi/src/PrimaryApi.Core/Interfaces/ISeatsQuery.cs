@@ -1,4 +1,5 @@
-﻿using PrimaryApi.Core.DomainModels;
+﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using PrimaryApi.Core.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace PrimaryApi.Core.Interfaces
 {
     public interface ISeatsQuery
     {
-        Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync();
+        Task<IEnumerable<DepartmentSeat>> GetAllSeatsAsync(UserAssertion userAssertion);
 
         Task<DepartmentSeat> GetSeatByUserIdAsync(string userId);
     }
