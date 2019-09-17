@@ -18,50 +18,47 @@ namespace PrimaryApi.WebForm
 {
     public partial class Index : System.Web.UI.Page
     {
+        /// <summary>
+        /// Client ID ex: 343c4d52-005c-4d2e-b7e7-ef98c0709373
+        /// </summary>
         private static string _clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-        private static string _metadataAddress = ConfigurationManager.AppSettings["ida:ADFSDiscoveryDoc"];
-        private static string _redirectUri = ConfigurationManager.AppSettings["ida:RedirectUri"];
+
+        /// <summary>
+        /// APP Key ex: YN1OvJOAfZD9Sj3FLOCewnOBbUq-VafedXXFXJuo
+        /// </summary>
+        private static string _appKey = ConfigurationManager.AppSettings["ida:AppKey"];
+
+        /// <summary>
+        /// Authority ex: https://adfs2016.southeastasia.cloudapp.azure.com/adfs/
+        /// </summary>
+        private static string _authority = ConfigurationManager.AppSettings["ida:Authority"];
+
+        /// <summary>
+        /// Resource Id ex: https://localhost:44326
+        /// </summary>
+        private static string _resourceId = ConfigurationManager.AppSettings["ida:ResourceId"];
+
 
         protected async void Page_Load(object sender, EventArgs e)
         {
             if (Request.IsAuthenticated)
             {
-                ClaimsPrincipal current = ClaimsPrincipal.Current;
-                var bootstrapContext = current.Identities.First().BootstrapContext;
-
                 Response.Write(HttpContext.Current.User.Identity.Name);
-               
-                var authContext = new AuthenticationContext(
-                    "https://adfs2016.southeastasia.cloudapp.azure.com/adfs/", 
-                    false
-                    );
+             
+                var authContext = new AuthenticationContext(_authority, false);
 
-                //UserAssertion userAssertion = new UserAssertion(bootstrapContext.ToString(),
-                //                             "urn:ietf:params:oauth:grant-type:jwt-bearer",
-                //                                "Sky");
+                var credential = new ClientCredential(_clientId,_appKey);
 
+                var nameIdentifier = ClaimsPrincipal.Current.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
 
-                var backendtokenTask = await authContext.AcquireTokenAsync(
-                    "https://localhost:44326", // ResourceID
-                    _clientId,
-                    new Uri(_redirectUri),
-                    new PlatformParameters(PromptBehavior.Auto));
-
-                //var clientId = "39dd26f0-2a50-464f-b6a6-f6a9f6d60413";
-                //var clientSecret = "b385U0bfgD3Jyxqg2TaKsDBipTPQey0RUJBKDuhh";
-                //var credential = new ClientCredential(clientId, clientSecret);
-
-                //var backendtokenTask = await authContext.AcquireTokenAsync(
-                //    "https://localhost:44326", // ResourceID
-                //    _clientId,
-                //    userAssertion);
-
-
-                Response.Write(backendtokenTask.AccessToken);
+                var result = await authContext.AcquireTokenSilentAsync(
+                    _resourceId,
+                    credential, 
+                    new UserIdentifier(nameIdentifier, UserIdentifierType.UniqueId));
 
                 var httpClient = new HttpClient();
                 httpClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", backendtokenTask.AccessToken);
+                    new AuthenticationHeaderValue("Bearer", result.AccessToken);
 
                 var response = await httpClient.GetAsync(@"https://localhost:44326/api/v1/seats");
 
