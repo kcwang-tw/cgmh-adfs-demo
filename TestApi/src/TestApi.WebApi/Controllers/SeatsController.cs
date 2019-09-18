@@ -28,7 +28,11 @@ namespace TestApi.WebApi.Controllers
             var scopeClaim = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/scope");
             if (scopeClaim == null || (!scopeClaim.Value.Contains("user_impersonation")))
             {
-                throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The Scope claim does not contain 'user_impersonation' or scope claim not found" });
+                throw new HttpResponseException(
+                    new HttpResponseMessage {
+                        StatusCode = HttpStatusCode.Unauthorized,
+                        ReasonPhrase = "The Scope claim does not contain " +
+                        "'user_impersonation' or scope claim not found" });
             }
 
             Claim subject = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Upn);

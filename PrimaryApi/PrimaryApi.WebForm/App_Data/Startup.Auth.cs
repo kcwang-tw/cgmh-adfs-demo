@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
@@ -60,7 +61,7 @@ namespace PrimaryApi.WebForm
                 {
                     ClientId = _clientId,
                     MetadataAddress = _metadataAddress,
-                    PostLogoutRedirectUri = _redirectUri,
+                    PostLogoutRedirectUri = "https://localhost:44398/index.aspx",
                     RedirectUri = _redirectUri,
                     TokenValidationParameters = new TokenValidationParameters
                     {
@@ -68,7 +69,6 @@ namespace PrimaryApi.WebForm
                     },
                     Notifications = new OpenIdConnectAuthenticationNotifications
                     {
-
                         AuthorizationCodeReceived = async (AuthorizationCodeReceivedNotification context) =>
                         {
                             AuthenticationContext authContext = new AuthenticationContext(_authority, false);
@@ -78,11 +78,35 @@ namespace PrimaryApi.WebForm
 
                             // ASP.NET Web Form 走 OIDC，故這邊加上 AuthorizationCode 流程，讓後續可以使用 OBO 呼叫 API
                             AuthenticationResult result = await authContext.AcquireTokenByAuthorizationCodeAsync(
-                                context.Code, 
-                                uri, 
+                                context.Code,
+                                uri,
                                 new ClientCredential(_clientId, _appKey),
                                 _resourceId);
                         },
+                        SecurityTokenValidated = notification =>
+                        {
+                            // 設定 id_token ( Logout 需要使用 )
+                            // 若是 asp.net core 可以直接使用 SaveToken 來處理
+                            notification.AuthenticationTicket.Identity.AddClaim(new Claim("id_token", notification.ProtocolMessage.IdToken));
+                            return Task.FromResult(0);
+                        },
+                        RedirectToIdentityProvider = n =>
+                        {
+                            // if signing out, add the id_token_hint
+                            if (n.ProtocolMessage.RequestType == OpenIdConnectRequestType.Logout)
+                            {
+                                var idTokenHint = n.OwinContext.Authentication.User.FindFirst("id_token");
+
+                                if (idTokenHint != null)
+                                {
+                                    // 設定 id_token_hint ( 登出時必須使用 id_token )
+                                    n.ProtocolMessage.IdTokenHint = idTokenHint.Value;
+                                }
+
+                            }
+
+                            return Task.FromResult(0);
+                        }
                         // 錯誤處理，這邊沒使用，註解提供給你們備查
                         //AuthenticationFailed =
                         //(AuthenticationFailedNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> context) =>
