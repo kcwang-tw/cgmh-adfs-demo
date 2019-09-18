@@ -44,16 +44,17 @@ namespace PrimaryApi.WebForm
             if (Request.IsAuthenticated)
             {
                 Response.Write(HttpContext.Current.User.Identity.Name);
-             
+
                 var authContext = new AuthenticationContext(_authority, false);
 
-                var credential = new ClientCredential(_clientId,_appKey);
+                var credential = new ClientCredential(_clientId, _appKey);
 
-                var nameIdentifier = ClaimsPrincipal.Current.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+                var nameIdentifier = ClaimsPrincipal.Current.Claims.FirstOrDefault(
+                    c => c.Type == ClaimTypes.NameIdentifier).Value;
 
                 var result = await authContext.AcquireTokenSilentAsync(
                     _resourceId,
-                    credential, 
+                    credential,
                     new UserIdentifier(nameIdentifier, UserIdentifierType.UniqueId));
 
                 var httpClient = new HttpClient();
@@ -64,7 +65,7 @@ namespace PrimaryApi.WebForm
 
                 if (!response.IsSuccessStatusCode)
                 {
-                     Response.Write("An error occurred : " + response.ReasonPhrase);
+                    Response.Write("An error occurred : " + response.ReasonPhrase);
 
                     return;
                 }
@@ -89,9 +90,13 @@ namespace PrimaryApi.WebForm
         // SignOut
         protected void Button2_Click(object sender, EventArgs e)
         {
+            // 取出所有驗證 Type
+            IEnumerable<AuthenticationDescription> authTypes = 
+                HttpContext.Current.GetOwinContext().Authentication.GetAuthenticationTypes();
+
             HttpContext.Current.GetOwinContext().Authentication.SignOut(
-                OpenIdConnectAuthenticationDefaults.AuthenticationType, 
-                CookieAuthenticationDefaults.AuthenticationType);
+                new AuthenticationProperties { RedirectUri= "https://localhost:44398/index.aspx" },
+                authTypes.Select(t => t.AuthenticationType).ToArray());
         }
 
         
